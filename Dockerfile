@@ -37,6 +37,7 @@ RUN wget https://repo.continuum.io/miniconda/Miniconda2-4.3.11-Linux-x86_64.sh
 RUN bash Miniconda2-4.3.11-Linux-x86_64.sh -b -p $ANACONDAPATH
 RUN conda update conda
 RUN conda install libgfortran=1.0
+RUN conda install matplotlib
 RUN conda install --channel guyer scipy gmsh
 RUN conda install --channel guyer pysparse openmpi mpi4py
 RUN conda install --channel guyer trilinos
@@ -64,6 +65,9 @@ RUN pip install pandas==0.19.2
 RUN pip install tables==3.3.0
 RUN conda install jupyter=1.0.0
 RUN conda install libgfortran=1.0
+RUN pip install ipy_table==1.12
+RUN pip install brewer2mpl==1.4.1
+
 
 ## Run Simulation
 
@@ -77,6 +81,17 @@ RUN smt configure -g uuid
 RUN smt configure -c store-diff
 RUN smt configure --addlabel=parameters
 
-RUN smt run params_fig4.json totalSteps=20
+RUN smt run -t testrun params_fig4.json totalSteps=200
+
+# View Simulations
+
+EXPOSE 8888
 
 ENV SHELL /bin/bash
+
+# Force update from this point
+ENV FAKE_ENV_VAR "Thu Mar 30 17:47:29 EDT 2017"
+
+ADD view.ipynb view.ipynb
+
+CMD jupyter notebook --ip 0.0.0.0 --no-browser

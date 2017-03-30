@@ -17,13 +17,19 @@ Pull the Docker Instance from Dockerhub
 
     $ docker pull docker.io/wd15/extremefill2d
 
-## Test FiPy
+## Run the Simulations
 
 Test the build inside the instance.
 
     $ docker run -i -t wd15/extremefill2d:latest /bin/bash
     $ cd $HOME/extremefill2D/scripts
     $ smt run params_fig4.json totalSteps=20
+
+## View the Results of the Test Simulation
+
+    $ docker run -i -t wd15/extremefill2d:lates
+
+Open the link to the browser display in the ouput. Run all the cells
 
 ## Build the Docker instance
 
