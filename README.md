@@ -27,7 +27,7 @@ Test the build inside the instance.
 
 ## View the Results of the Test Simulation
 
-    $ docker run -i -t wd15/extremefill2d:lates
+    $ docker run -i -t -p 8888:8888 wd15/extremefill2d:latest
 
 Open the link to the browser display in the ouput. Run all the cells
 

@@ -75,15 +75,8 @@ RUN git config --global user.name "Main"
 RUN git config --global user.email "main@main.com"
 
 WORKDIR $HOME/extremefill2D/scripts
-RUN smt init smt-extremefill2D
-RUN smt configure --executable=python --main=script.py
-RUN smt configure -g uuid
-RUN smt configure -c store-diff
-RUN smt configure --addlabel=parameters
 
-RUN smt run -t testrun params_fig4.json totalSteps=200
-
-# View Simulations
+ADD view.ipynb view.ipynb
 
 EXPOSE 8888
 
@@ -92,6 +85,23 @@ ENV SHELL /bin/bash
 # Force update from this point
 ENV FAKE_ENV_VAR "Thu Mar 30 17:47:29 EDT 2017"
 
-ADD view.ipynb view.ipynb
+RUN mkdir /data
+RUN mkdir /data/Data
+WORKDIR /data
+VOLUME /data
 
-CMD jupyter notebook --ip 0.0.0.0 --no-browser
+CMD \rm -rf * && \
+    cp $HOME/extremefill2D/scripts/script.py /data && \
+    cp $HOME/extremefill2D/scripts/params_fig4.json /data && \
+    cp $HOME/extremefill2D/scripts/view.ipynb /data && \
+    git init && \
+    git add script.py params_fig4.json && \
+    git commit -m "initial commit" && \
+    smt init smt-extremefill2D && \
+    smt configure --executable=python --main=script.py && \
+    smt configure -g uuid && \
+    smt configure -c store-diff && \
+    smt configure --addlabel=parameters && \
+    smt run -t testrun params_fig4.json totalSteps=10
+
+# jupyter notebook --ip 0.0.0.0 --no-browser
