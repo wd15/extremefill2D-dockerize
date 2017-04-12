@@ -83,25 +83,14 @@ EXPOSE 8888
 ENV SHELL /bin/bash
 
 # Force update from this point
-ENV FAKE_ENV_VAR "Thu Mar 30 17:47:29 EDT 2017"
+ENV FAKE_ENV_VAR "Wed Apr 12 12:53:11 EDT 2017"
 
 RUN mkdir /data
 RUN mkdir /data/Data
 WORKDIR /data
 VOLUME /data
 
-CMD \rm -rf * && \
-    cp $HOME/extremefill2D/scripts/script.py /data && \
-    cp $HOME/extremefill2D/scripts/params_fig4.json /data && \
-    cp $HOME/extremefill2D/scripts/view.ipynb /data && \
-    git init && \
-    git add script.py params_fig4.json && \
-    git commit -m "initial commit" && \
-    smt init smt-extremefill2D && \
-    smt configure --executable=python --main=script.py && \
-    smt configure -g uuid && \
-    smt configure -c store-diff && \
-    smt configure --addlabel=parameters && \
-    smt run -t testrun params_fig4.json totalSteps=10
+ADD run.sh $HOME
+CMD bash $HOME/run.sh /data
 
 # jupyter notebook --ip 0.0.0.0 --no-browser

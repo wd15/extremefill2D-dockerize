@@ -19,11 +19,24 @@ Pull the Docker Instance from Dockerhub
 
 ## Run the Simulations
 
-Test the build inside the instance.
+Run the test simulation.
 
-    $ docker run -i -t wd15/extremefill2d:latest /bin/bash
-    $ cd $HOME/extremefill2D/scripts
-    $ smt run params_fig4.json totalSteps=20
+    $ mkdir /data/docker
+    $ docker run -i -t -v /data/docker:/data wd15/extremefill2d:latest
+
+This will set up `.smt` and `.git` directories in `/data/docker` and
+run a small test simulation with the results in `/data/docker/Data`.
+
+To run subsequent simulations use.
+
+    $ docker run -i -t -v /data/docker:/data wd15/extremefill2d:latest /bin/bash
+    $ smt run -t my_sim params_fig4.json totalSteps=10
+
+for instance. To initalize the data directory again use
+
+    $ docker run -i -t -v /data/docker:/data wd15/extremefill2d:latest /bin/bash
+    $ \rm -rf .git .smt *
+    $ bash $HOME/run.sh /data
 
 ## View the Results of the Test Simulation
 
