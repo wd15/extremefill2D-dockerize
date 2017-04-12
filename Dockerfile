@@ -43,6 +43,9 @@ RUN conda install --channel guyer pysparse openmpi mpi4py
 RUN conda install --channel guyer trilinos
 RUN pip install scikit-fmm
 
+RUN git config --global user.name "Main"
+RUN git config --global user.email "main@main.com"
+
 ## Install FiPy
 
 RUN git clone https://github.com/usnistgov/fipy
@@ -50,13 +53,9 @@ WORKDIR $HOME/fipy
 RUN git checkout ecbe868f2aff6dbc43fb8ed532e581a03ebab5d5
 RUN python setup.py develop
 
-## Install Extremefill2D
+## Install Extremefill2D dependencies
 
 WORKDIR $HOME
-RUN git clone https://github.com/wd15/extremefill2D.git
-WORKDIR $HOME/extremefill2D
-RUN git checkout 7eb7ca8
-RUN python setup.py develop
 RUN pip install sumatra==0.7.4
 RUN pip install configparser==3.5.0
 RUN pip install gitpython==2.1.3
@@ -68,15 +67,7 @@ RUN conda install libgfortran=1.0
 RUN pip install ipy_table==1.12
 RUN pip install brewer2mpl==1.4.1
 
-
-## Run Simulation
-
-RUN git config --global user.name "Main"
-RUN git config --global user.email "main@main.com"
-
-WORKDIR $HOME/extremefill2D/scripts
-
-ADD view.ipynb view.ipynb
+## Setup
 
 EXPOSE 8888
 
@@ -85,12 +76,22 @@ ENV SHELL /bin/bash
 # Force update from this point
 ENV FAKE_ENV_VAR "Wed Apr 12 12:53:11 EDT 2017"
 
-RUN mkdir /data
-RUN mkdir /data/Data
-WORKDIR /data
-VOLUME /data
+RUN mkdir $HOME/data
+RUN mkdir $HOME/data/Data
+VOLUME $HOME/data
 
 ADD run.sh $HOME
-CMD bash $HOME/run.sh /data
 
-# jupyter notebook --ip 0.0.0.0 --no-browser
+## Install Extremefill2D
+
+WORKDIR $HOME
+RUN git clone https://github.com/wd15/extremefill2D.git
+WORKDIR $HOME/extremefill2D
+RUN git checkout 7eb7ca8
+RUN python setup.py develop
+WORKDIR $HOME/extremefill2D/scripts
+ADD view.ipynb view.ipynb
+
+WORKDIR $HOME/data
+
+CMD bash $HOME/run.sh $HOME/data

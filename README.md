@@ -22,25 +22,26 @@ Pull the Docker Instance from Dockerhub
 Run the test simulation.
 
     $ mkdir /data/docker
-    $ docker run -i -t -v /data/docker:/data wd15/extremefill2d:latest
+    $ docker run -i -t -v /data/docker:/home/main/data wd15/extremefill2d:latest
 
 This will set up `.smt` and `.git` directories in `/data/docker` and
 run a small test simulation with the results in `/data/docker/Data`.
 
 To run subsequent simulations use.
 
-    $ docker run -i -t -v /data/docker:/data wd15/extremefill2d:latest /bin/bash
+    $ docker run -i -t -v /data/docker:/home/main/data wd15/extremefill2d:latest /bin/bash
     $ smt run -t my_sim params_fig4.json totalSteps=10
 
 for instance. To initalize the data directory again use
 
-    $ docker run -i -t -v /data/docker:/data wd15/extremefill2d:latest /bin/bash
+    $ docker run -i -t -v /data/docker:/home/main/data wd15/extremefill2d:latest /bin/bash
     $ \rm -rf .git .smt *
-    $ bash $HOME/run.sh /data
+    $ bash $HOME/run.sh /home/main/data
 
 ## View the Results of the Test Simulation
 
-    $ docker run -i -t -p 8888:8888 wd15/extremefill2d:latest
+    $ docker run -i -t -p 8888:8888 -v /data/docker:/home/main/data wd15/extremefill2d:latest /bin/bash
+    $ jupyter notebook --ip 0.0.0.0 --no-browser
 
 Open the link to the browser display in the ouput. Run all the cells
 
