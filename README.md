@@ -58,7 +58,7 @@ Clone this repository and build the instance.
 Create the repository in Dockerhub and then push it.
 
     $ docker login
-    $ docker push docker.io/wd15/extremefill2d:latest
+    $ docker push docker.io/wd15/extremefill2d
 
 ## See the Travis CI test of this instance
 
