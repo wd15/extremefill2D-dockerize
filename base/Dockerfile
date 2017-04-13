@@ -74,7 +74,7 @@ EXPOSE 8888
 ENV SHELL /bin/bash
 
 # Force update from this point
-ENV FAKE_ENV_VAR "Wed Apr 12 12:53:11 EDT 2017"
+ENV FAKE_ENV_VAR "Wed Apr 12 22:20:01 EDT 2017"
 
 RUN mkdir $HOME/data
 RUN mkdir $HOME/data/Data
