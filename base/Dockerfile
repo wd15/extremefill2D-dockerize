@@ -8,6 +8,7 @@ USER root
 
 RUN apt-get -y update
 RUN apt-get install -y git sudo bzip2 g++ libgfortran3 liblapack3 wget
+RUN apt-get install -y nano
 RUN apt-get clean
 # RUN apt-get dist-upgrade -y
 
