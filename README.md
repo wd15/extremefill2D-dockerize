@@ -1,8 +1,5 @@
 # Run Extremefill2D Simulation in a Docker Instance
 
-This runs figure 4 from
-[paper](https://dx.doi.org/10.1149/2.040312jes).
-
 ## Install Docker
 
 Install Docker and run the Deamon. See
@@ -21,11 +18,13 @@ Pull the Docker Instance from Dockerhub
 
 Run the test simulation.
 
-    $ mkdir /data/docker
-    $ docker run -i -t -v /data/docker:/home/main/data wd15/extremefill2d:latest
+    $ git clone https://github.com/wd15/extremefill2D-dockerize
+    $ cd extremefill2D-dockerize
+    $ docker run -i -t -v ${PWD}:/home/main/work wd15/extremefill2d:latest
+    # bash setup.sh
 
-This will set up `.smt` and `.git` directories in `/data/docker` and
-run a small test simulation with the results in `/data/docker/Data`.
+This will set up the `.smt` directory and run a small test simulation
+with the results in `/data/docker/Data`.
 
 To run subsequent simulations use.
 
