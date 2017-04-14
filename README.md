@@ -23,26 +23,13 @@ Run the test simulation.
     $ docker run -i -t -v ${PWD}:/home/main/work wd15/extremefill2d:latest
     # bash setup.sh
 
-This will set up the `.smt` directory and run a small test simulation
-with the results in `/data/docker/Data`.
-
-To run subsequent simulations use.
-
-    $ docker run -i -t -v /data/docker:/home/main/data wd15/extremefill2d:latest /bin/bash
-    $ smt run -t my_sim params_fig4.json totalSteps=10
-
-for instance. To initalize the data directory again use
-
-    $ docker run -i -t -v /data/docker:/home/main/data wd15/extremefill2d:latest /bin/bash
-    $ \rm -rf .git .smt *
-    $ bash $HOME/run.sh /home/main/data
-
 ## View the Results of the Test Simulation
 
-    $ docker run -i -t -p 8888:8888 -v /data/docker:/home/main/data wd15/extremefill2d:latest /bin/bash
+    $ docker run -i -t -p 8888:8888 -v ${PWD}:/home/main/work wd15/extremefill2d:latest
     $ jupyter notebook --ip 0.0.0.0 --no-browser
 
-Open the link to the browser display in the ouput. Run all the cells
+Open the link to `view.ipynb` in the browser display. Run all the
+cells
 
 ## Build the Docker instance
 
@@ -58,7 +45,3 @@ Create the repository in Dockerhub and then push it.
 
     $ docker login
     $ docker push docker.io/wd15/extremefill2d
-
-## See the Travis CI test of this instance
-
-Not working yet.

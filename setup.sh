@@ -1,4 +1,4 @@
-if ! [ -d "$1/.smt" ]
+if ! [ -d ".smt" ]
         then
     smt init extremefill2D
     smt configure --executable=python --main=script.py
