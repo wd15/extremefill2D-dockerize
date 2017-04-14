@@ -14,7 +14,7 @@ Pull the Docker Instance from Dockerhub
 
     $ docker pull docker.io/wd15/extremefill2d
 
-## Run the Simulations
+## Run the Test Simulation
 
 Run the test simulation.
 
@@ -22,6 +22,15 @@ Run the test simulation.
     $ cd extremefill2D-dockerize
     $ docker run -i -t -v ${PWD}:/home/main/work wd15/extremefill2d:latest
     # bash setup.sh
+
+## Run Another Simulation
+
+The subdirecties store the parameter files for other simulations. For
+example,
+
+    $ docker run -i -t -v ${PWD}:/home/main/work wd15/extremefill2d:latest
+    # bash fig4/setup.sh
+    # bash fig4/run.sh
 
 ## View the Results of the Test Simulation
 
