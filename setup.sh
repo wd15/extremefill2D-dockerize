@@ -13,4 +13,4 @@ if ! [ -d ".smt" ]
     smt configure --addlabel=parameters
 fi
 
-smt run -t fig4test fig4/params.json totalSteps=10
+smt run -t testrun params.json totalSteps=10
