@@ -80,6 +80,7 @@ RUN python setup.py develop
 ## Setup
 
 EXPOSE 8888
+EXPOSE 8000
 
 ENV SHELL /bin/bash
 

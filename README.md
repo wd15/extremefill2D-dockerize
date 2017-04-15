@@ -38,7 +38,14 @@ example,
     # jupyter notebook --ip 0.0.0.0 --no-browser
 
 Open the link to `view.ipynb` in the browser display. Run all the
-cells
+cells. View the results at http://127.0.0.1:8888.
+
+## View the records with smtweb
+
+    $ docker run -i -t -p 8000:8000 -v ${PWD}:/home/main/work wd15/extremefill2d:latest
+    $ smtweb -p 8000 -a -n
+
+View the results at http://127.0.0.1:8000
 
 ## Build the Docker instance
 
