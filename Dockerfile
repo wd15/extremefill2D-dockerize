@@ -7,7 +7,12 @@ ENV DEBIAN_FRONTEND noninteractive
 USER root
 
 RUN apt-get -y update
-RUN apt-get install -y git sudo bzip2 g++ libgfortran3 liblapack3 wget && apt-get clean
+RUN apt-get install -y git && apt-get clean
+RUN apt-get install -y sudo && apt-get clean
+RUN apt-get install -y bzip2 && apt-get clean
+RUN apt-get -y update
+RUN apt-get install -y --fix-missing g++ && apt-get clean
+RUN apt-get install -y libgfortran3 liblapack3 wget && apt-get clean
 RUN apt-get install -y nano && apt-get clean
 
 RUN useradd -m -s /bin/bash main
@@ -84,9 +89,5 @@ EXPOSE 8000
 
 ENV SHELL /bin/bash
 
-RUN mkdir $HOME/work
-RUN mkdir $HOME/work/Data
-
 VOLUME $HOME/work
-
 WORKDIR $HOME/work
