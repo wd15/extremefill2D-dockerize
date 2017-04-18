@@ -35,6 +35,7 @@ example,
 ## View the Results of the Test Simulation
 
     $ docker run -i -t -p 8888:8888 -v ${PWD}:/home/main/work wd15/extremefill2d:latest
+    # jupyter trust view.ipynb
     # jupyter notebook --ip 0.0.0.0 --no-browser
 
 Open the link to `view.ipynb` in the browser display. Run all the
