@@ -1,10 +1,9 @@
 WORKDIR=${PWD}
 cd ${HOME}/extremefill2D
-git checkout 71e554bd8a2a
+git fetch
+git checkout 5319cc4d8df4
 export PYTHONPATH=${PWD}
 cd ${WORKDIR}
-cp ${HOME}/extremefill2D/annular.py ./fig4_old/script.py
-cp ${HOME}/extremefill2D/annular.param ./fig4_old/params.param
 
 if ! [ -d ".smt" ]
         then

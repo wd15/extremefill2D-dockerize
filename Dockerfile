@@ -73,6 +73,7 @@ RUN conda install jupyter=1.0.0 && conda clean --all
 RUN conda install libgfortran=1.0 && conda clean --all
 RUN $PIP install ipy_table==1.12
 RUN $PIP install brewer2mpl==1.4.1
+RUN $PIP install texttable==0.8.8
 
 ## Install Extremefill2D
 
